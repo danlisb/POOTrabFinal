@@ -4,18 +4,33 @@ public class Dado extends JogoDaExplosao {
     private int valor;
     private Random gerador;
 
-    Dado() {
+    public Dado() {
         valor = 0;
         gerador = new Random();
     }
 
     public int rolar(){
-        valor = gerador.nextInt(5);
+        valor = gerador.nextInt(6) + 1;
+        System.out.println(toString());
         return valor;
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        switch(valor) {
+            case 1:
+              return "Voce rolou o dado e tirou 1.";
+            case 2:
+                return "Voce rolou o dado e tirou 2.";
+            case 3:
+                return "Voce rolou o dado e tirou 3.";
+            case 4:
+                return "Voce rolou o dado e tirou uma bomba.";
+            case 5:
+                return "Voce rolou o dado e tirou uma bomba."; 
+            case 6:
+                return "Voce rolou o dado e ganhou um item!.";
+          }
+        return "";
     }
 }
