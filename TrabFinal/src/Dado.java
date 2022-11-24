@@ -10,7 +10,7 @@ public class Dado extends JogoDaExplosao {
     }
 
     public int rolar(){
-        valor = gerador.nextInt(6) + 1;
+        valor = gerador.nextInt(3) + 1; // atualizar para 6 depois
         System.out.println(toString());
         return valor;
     }
@@ -24,12 +24,12 @@ public class Dado extends JogoDaExplosao {
                 return "Voce rolou o dado e tirou 2.";
             case 3:
                 return "Voce rolou o dado e tirou 3.";
-            case 4:
-                return "Voce rolou o dado e tirou uma bomba.";
-            case 5:
-                return "Voce rolou o dado e tirou uma bomba."; 
-            case 6:
-                return "Voce rolou o dado e ganhou um item!.";
+            // case 4:
+            //     return "Voce rolou o dado e tirou uma bomba.";
+            // case 5:
+            //     return "Voce rolou o dado e tirou uma bomba."; 
+            // case 6:
+            //     return "Voce rolou o dado e ganhou um item!.";
           }
         return "";
     }
