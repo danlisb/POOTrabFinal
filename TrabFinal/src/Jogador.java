@@ -10,7 +10,6 @@ public class Jogador {
         this.nome = nome;
         this.posicao = posicao;
         this.posicaoInicial = posicao;
-
     }
 
     public int getPosicao() {
@@ -21,14 +20,39 @@ public class Jogador {
         return posicaoInicial;
     }
 
-    public void moverJogador(int numeroDePassos) {
+    public int moverJogador(int numeroDePassos) {
+        int posicaoAnterior = this.posicao;
         if(this.posicao + numeroDePassos > 19)
             this.posicao = 0;
         this.posicao += numeroDePassos;
+        return posicaoAnterior;
+
+    }
+
+    public void moverParaProximaTorre() {
+        if(this.posicao > 0 && this.posicao < 5)
+            this.posicao = 5;
+        else if (this.posicao > 5 && this.posicao < 10)
+            this.posicao = 10;
+        else if (this.posicao > 10 && this.posicao < 15)
+            this.posicao = 15;
+        else if (this.posicao > 15)
+            this.posicao = 0;
+    }
+
+    public void moverParaTorreAnterior() {
+        if(this.posicao > 0 && this.posicao < 5)
+            this.posicao = 0;
+        else if (this.posicao > 5 && this.posicao < 10)
+            this.posicao = 5;
+        else if (this.posicao > 10 && this.posicao < 15)
+            this.posicao = 10;
+        else if (this.posicao > 15)
+            this.posicao = 15;
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return this.nome;
     }
 }
