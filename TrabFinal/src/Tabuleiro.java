@@ -26,29 +26,39 @@ public class Tabuleiro {
         return ambiente[indice] == 1 ? true : false;
     }
 
+    public boolean ehBuraco(int indice) {
+        return ambiente[indice] == 0 ? true : false;
+    }
+
     public void colocaPonte(int posicaoAnterior, int posicaoDoJogador) {
         if(posicaoAnterior < posicaoDoJogador){
-            for(int i = posicaoAnterior; i <= posicaoDoJogador; i++)
-                if(!temPonte(i))
+            for(int i = posicaoAnterior + 1; i <= posicaoDoJogador; i++)
+                if(!temPonte(i) && ehBuraco(i)) {
                     ambiente[i] = 1;
+                    System.out.println(i);
+                }
         } else {
-            for(int i = posicaoAnterior; i < 20; i++)
-                if(!temPonte(i))
+            for(int i = posicaoAnterior + 1; i < 20; i++)
+                if(!temPonte(i) && ehBuraco(i)) {
                     ambiente[i] = 1;
-            for(int i = 1; i < posicaoDoJogador; i++)
-                if(!temPonte(i))
+                    System.out.println(i);
+                }
+            for(int i = 0; i <= posicaoDoJogador; i++)
+                if(!temPonte(i) && ehBuraco(i)) {
                     ambiente[i] = 1;
+                    System.out.println(i);
+                }
         }
     }
 
     public void tiraPonte(int indice) {
-        if(indice == 1)
+        if(ambiente[indice] == 1)
             ambiente[indice] = 0;
     }
 
     public void explodirPonte(List <Jogador> jogadores) {
         int lado = gerador.nextInt(4)+1;
-
+        
         switch(lado) {
             case 1: // cima
                 for(int i = 1; i < 5; i++)
@@ -71,9 +81,6 @@ public class Tabuleiro {
         for (Jogador jogador : jogadores) 
             if(ambiente[jogador.getPosicao()] == 0)
                 jogador.moverParaTorreAnterior();
-        
-        
-        
     }
 
     @Override

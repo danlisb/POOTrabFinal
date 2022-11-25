@@ -3,8 +3,8 @@ public class Jogador {
     private int posicao;
     private int posicaoInicial;
 
-    private Item passivo;
-    private Item instantaneo;
+    // private Item passivo;
+    // private Item instantaneo;
 
     public Jogador(String nome, int posicao) {
         this.nome = nome;
@@ -22,9 +22,12 @@ public class Jogador {
 
     public int moverJogador(int numeroDePassos) {
         int posicaoAnterior = this.posicao;
+
         if(this.posicao + numeroDePassos > 19)
-            this.posicao = 0;
-        this.posicao += numeroDePassos;
+            this.posicao = this.posicao + numeroDePassos - 20;
+        else
+            this.posicao += numeroDePassos;
+            
         return posicaoAnterior;
 
     }
