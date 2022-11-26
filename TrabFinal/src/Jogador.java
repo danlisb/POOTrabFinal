@@ -62,4 +62,21 @@ public class Jogador {
     public String toString() {
         return "Nome: " + nome + " - Posicao: " + posicao;
     }
+
+    /*public String temItemJogador(Jogador jogador, Item item){
+        if(AsasDeIcaro == true)
+            return "Possui Assas de Icaro\n" + "Item passivo";
+        if(Escudo escudo == true)
+            return "Possui Escudo\n" + "Item passivo";
+        if(Velocidade velocidade == true)
+            return "Possui Velocidade\n" + "Item passivo";
+        if(Empurrar empurrar == true)
+            return "Possui Empurrar\n" + "Item ativo";
+        if(Imobilizar imobilizar == true)
+            return "Possui Imobilizar\n" + "Item ativo";
+        if(Sabotar sabotar == true)
+            return "Possui Sabotar\n" + "Item ativo";
+        else
+            return null;
+    } */
 }

@@ -1,11 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Random;
 
 public class JogoDaExplosao {
     private List <Jogador> jogadores = new ArrayList<>();
     private Tabuleiro tabuleiro;
     private Dado dado;
+    private Random gerador;
+    private Item asasDeIcaro;
+
 
     public JogoDaExplosao(){
         
@@ -52,5 +56,31 @@ public class JogoDaExplosao {
         }
     }
 
-    
+    /*public void ganharPoder(Jogador jogador){
+        int valor;
+        gerador  = new Random();
+        if(dado.rolar() == 6){
+          valor =  gerador.nextInt(6) + 1; // atualizar para 6 depois
+          switch(valor) {
+            case 1: // AsasDeIcaro
+
+                break;
+            case 2: // Empurrar
+                
+                break;
+            case 3: // Escudo
+                
+                break;
+            case 4: // Imobilizar
+                
+                break;
+            case 5: // Sabotar
+
+                break;
+            case 6: // Velocidade
+
+                break;
+            }
+        }
+    }*/
 }

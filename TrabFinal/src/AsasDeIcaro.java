@@ -8,4 +8,8 @@ public class AsasDeIcaro extends Passivo {
     public String toString() {
         return "As asas de ícaro";
     }
+
+    /*  public boolean temAsas(Jogador jogador){
+        return true;
+    }*/
 }
