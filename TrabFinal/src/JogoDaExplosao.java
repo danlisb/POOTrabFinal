@@ -16,7 +16,7 @@ public class JogoDaExplosao {
     }
     
 
-    public void IniciarJogo() {
+    public void iniciarJogadores() { // Recebe a quantidade de jogadores e os inicializa, com nomes e suas posicoes iniciais no tabuleiro
         Scanner scanner = new Scanner(System.in);
         String nomeDoJogador;
         int posicaoInicial = 0;
@@ -49,6 +49,8 @@ public class JogoDaExplosao {
         }
         scanner.close();
     }
+
+    
 
     public void listarJogadores() {
         for (Jogador jogador : jogadores) {
