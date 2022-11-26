@@ -20,6 +20,10 @@ public class Jogador {
         return posicaoInicial;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public int moverJogador(int numeroDePassos) {
         int posicaoAnterior = this.posicao;
 
@@ -56,6 +60,6 @@ public class Jogador {
 
     @Override
     public String toString() {
-        return this.nome;
+        return "Nome: " + nome + " - Posicao: " + posicao;
     }
 }
