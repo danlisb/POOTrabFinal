@@ -103,9 +103,9 @@ public class Jogador {
     public void moverParaTorreAnterior() {
         int posicaoAnterior = this.posicao;
 
-        if( == true)
-            moverParaProximaTorre();
-        else if(this.posicao > 0 && this.posicao < 5)
+        //if( == true)
+        //    moverParaProximaTorre();
+        if(this.posicao > 0 && this.posicao < 5)
             this.posicao = 0;
         else if (this.posicao > 5 && this.posicao < 10)
             this.posicao = 5;
@@ -123,20 +123,4 @@ public class Jogador {
         return "Nome: " + nome + " - Posicao: " + posicao;
     }
 
-    public boolean temItem(boolean item){
-        if( == true)
-            return "Possui Assas de Icaro\n" + "Item passivo";
-        else if(escudo == true)
-            return "Possui Escudo\n" + "Item passivo";
-        else if(velocidade == true)
-            return "Possui Velocidade\n" + "Item passivo";
-         else if(empurra == true)
-            return "Possui Empurrar\n" + "Item ativo";
-        else if(imobilizar == true)
-            return "Possui Imobilizar\n" + "Item ativo";
-        else if(sabotar == true)
-            return "Possui Sabotar\n" + "Item ativo";
-        else
-            return "Não possui itens";
-    } 
 }
