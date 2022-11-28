@@ -5,12 +5,6 @@ public class Jogador {
     private int posicao;
     private int posicaoInicial;
     private int passosDados;
-    private boolean asasDeIcaro;
-    private boolean velocidade;
-    private boolean escudo;
-    private boolean empurra;
-    private boolean sabotar;
-    private boolean imobilizar;
 
     // private Item passivo;
     // private Item instantaneo;
@@ -20,16 +14,10 @@ public class Jogador {
         this.passosDados = 0;
         this.posicao = posicao;
         this.posicaoInicial = posicao;
-        this.asasDeIcaro = tem;
-        this.velocidade = tem;
-        this.escudo = tem;
-        this.empurra = tem;
-        this.sabotar = tem;
-        this.imobilizar = tem;
 
     }
 
-    public void ganharPoder(Jogador jogador){
+    public void ganharPoder(){
         int valor;
         Random gerador = new Random();
         Dado dado = new Dado();
@@ -37,22 +25,28 @@ public class Jogador {
           valor =  gerador.nextInt(6) + 1; // atualizar para 6 depois
           switch(valor) {
             case 1: // AsasDeIcaro
-                this.asasDeIcaro = true;
+                AsasDeIcaro a = new AsasDeIcaro("asasDeIcaro");
+                a.temItem(true);
                 break;
             case 2: // Empurrar
-                this.empurra = true;
+                Empurrar e = new Empurrar("empurrar");
+                e.temItem(true);
                 break;
             case 3: // Escudo
-                this.escudo = true;
+                Escudo s = new Escudo("escudo");
+                s.temItem(true);
                 break;
             case 4: // Imobilizar
-                this.imobilizar = true;
+                Imobilizar i = new Imobilizar("imobilizar");
+                i.temItem(true);
                 break;
             case 5: // Sabotar
-                this.sabotar = true;
+                Sabotar sa = new Sabotar("sabotar");
+                sa.temItem(true);
                 break;
             case 6: // Velocidade
-                this.velocidade = true;                
+                Velocidade v = new Velocidade("velocidade");
+                v.temItem(true);              
                 break;
             }
         }
@@ -109,7 +103,7 @@ public class Jogador {
     public void moverParaTorreAnterior() {
         int posicaoAnterior = this.posicao;
 
-        if(asasDeIcaro == true)
+        if( == true)
             moverParaProximaTorre();
         else if(this.posicao > 0 && this.posicao < 5)
             this.posicao = 0;
@@ -129,8 +123,8 @@ public class Jogador {
         return "Nome: " + nome + " - Posicao: " + posicao;
     }
 
-    public String temItem(boolean item){
-        if(asasDeIcaro == true)
+    public boolean temItem(boolean item){
+        if( == true)
             return "Possui Assas de Icaro\n" + "Item passivo";
         else if(escudo == true)
             return "Possui Escudo\n" + "Item passivo";
