@@ -1,9 +1,12 @@
-abstract public class Item extends Jogador {
+abstract public class Item {
     private String nome;
 
     public Item(String n) {
-        super(n, 5, false);
         this.nome = n;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
 }

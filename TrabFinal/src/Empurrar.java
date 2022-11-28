@@ -3,15 +3,12 @@ public class Empurrar extends Passivo {
     // o jogador passar. Caso haja mais de um adversário na mesma casa, o jogador
     // escolherá qual será empurrado.
 
-    public Empurrar(String n) {
-        super(n);
+    public Empurrar() {
+        super("Empurrar");
     }
 
     @Override
     public String toString() {
-        return super.toString();
-    }
-
-    public void temItem(boolean b) {
-    }    
+        return super.toString() + super.getNome();
+    }  
 }

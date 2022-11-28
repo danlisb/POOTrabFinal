@@ -5,16 +5,19 @@ public class Jogador {
     private int posicao;
     private int posicaoInicial;
     private int passosDados;
+    private boolean imobilizado;
 
-    // private Item passivo;
-    // private Item instantaneo;
+    private Passivo passivo;
+    private Instantaneo instantaneo;
 
-    public Jogador(String nome, int posicaoInicial2, boolean b) {
+    public Jogador(String nome, int posicao) {
         this.nome = nome;
         this.passosDados = 0;
         this.posicao = posicao;
         this.posicaoInicial = posicao;
-
+        this.passivo = null;
+        this.instantaneo = null;
+        this.imobilizado = false;
     }
 
     public void ganharPoder(){
@@ -26,28 +29,22 @@ public class Jogador {
           valor =  gerador.nextInt(6) + 1; // atualizar para 6 depois
           switch(valor) {
             case 1: // AsasDeIcaro
-                AsasDeIcaro a = new AsasDeIcaro("asasDeIcaro");
-                a.temItem(true);
+                this.passivo = new AsasDeIcaro("Asas De Icaro");
                 break;
             case 2: // Empurrar
-                Empurrar e = new Empurrar("empurrar");
-                e.temItem(true);
+                this.passivo = new Empurrar("Empurrar");
                 break;
             case 3: // Escudo
-                Escudo s = new Escudo("escudo");
-                s.temItem(true);
+                this.passivo = new Escudo("Escudo");
                 break;
             case 4: // Imobilizar
-                Imobilizar i = new Imobilizar("imobilizar");
-                i.temItem(true);
+                this.instantaneo = new Imobilizar("Imobilizar");
                 break;
             case 5: // Sabotar
-                Sabotar sa = new Sabotar("sabotar");
-                sa.temItem(true);
+                this.instantaneo = new Sabotar("Sabotar");
                 break;
             case 6: // Velocidade
-                Velocidade v = new Velocidade("velocidade");
-                v.temItem(true);              
+                this.instantaneo = new Velocidade("Velocidade");             
                 break;
             }
         }

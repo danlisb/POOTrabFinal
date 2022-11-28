@@ -1,15 +1,12 @@
 public class Sabotar extends Instantaneo {
     // Sabotar: Evita que um adversário acione o mecanismo de explosão.
 
-    public Sabotar(String n) {
-        super(n);
+    public Sabotar() {
+        super("Sabotar");
     }
 
     @Override
     public String toString() {
-        return super.toString();
-    }
-
-    public void temItem(boolean b) {
+        return super.toString() + super.getNome();
     }
 }

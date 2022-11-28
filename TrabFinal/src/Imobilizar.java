@@ -1,15 +1,14 @@
 public class Imobilizar extends Instantaneo {
     // Imobilizar: um jogador adversário fica uma rodada sem jogar.
 
-    public Imobilizar(String n) {
-        super(n);
+    public Imobilizar() {
+        super("Imobilizar");
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return super.toString() + super.getNome();
     }
 
-    public void temItem(boolean b) {
-    }
+   
 }

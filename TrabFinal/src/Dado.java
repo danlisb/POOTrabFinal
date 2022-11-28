@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Dado extends JogoDaExplosao {
+public class Dado{
     private int valor;
     private Random gerador;
 

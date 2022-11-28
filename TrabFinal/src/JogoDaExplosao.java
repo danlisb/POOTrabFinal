@@ -4,14 +4,18 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class JogoDaExplosao {
-    private List <Jogador> jogadores = new ArrayList<>();
+    private List <Jogador> jogadores;
     private Tabuleiro tabuleiro;
     private Dado dado;
     private Random gerador;
-    private Item asasDeIcaro;
+    private boolean sabotado;
 
     public JogoDaExplosao() {
-        
+        this.jogadores = new ArrayList<>();
+        this.tabuleiro = new Tabuleiro();
+        this.dado = new Dado();
+        this.gerador = new Random();
+        this.sabotado = false;
     }
 
     public void iniciarJogadores() { // Recebe a quantidade de jogadores e os inicializa, com nomes e suas posicoes iniciais no tabuleiro
@@ -42,7 +46,7 @@ public class JogoDaExplosao {
                             posicaoInicial = 15; // Posicao do quarto jogador
                             break;
                     }
-                    jogadores.add(new Jogador(nomeDoJogador, posicaoInicial, false));
+                    jogadores.add(new Jogador(nomeDoJogador, posicaoInicial));
                 } else {
                     System.out.println("Entrada invalida, insira novamente!");
                 }
@@ -56,31 +60,9 @@ public class JogoDaExplosao {
         }
     }
 
-    /*public void ganharPoder(Jogador jogador){
-        int valor;
-        gerador  = new Random();
-        if(dado.rolar() == 6){
-          valor =  gerador.nextInt(6) + 1; // atualizar para 6 depois
-          switch(valor) {
-            case 1: // AsasDeIcaro
+    public static void main(String[] args) throws Exception {
+    
+        JogoDaExplosao jogo = new JogoDaExplosao();
 
-                break;
-            case 2: // Empurrar
-                
-                break;
-            case 3: // Escudo
-                
-                break;
-            case 4: // Imobilizar
-                
-                break;
-            case 5: // Sabotar
-
-                break;
-            case 6: // Velocidade
-
-                break;
-            }
-        }
-    }*/
+    }
 }

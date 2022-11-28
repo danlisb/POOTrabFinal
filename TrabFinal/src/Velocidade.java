@@ -1,15 +1,14 @@
 public class Velocidade extends Instantaneo {
     // Velocidade: duplica o valor tirado no dado.
 
-    public Velocidade(String n) {
-        super(n);
+    
+    public Velocidade() {
+        super("Velocidade");
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return super.toString() + super.getNome();
     }
 
-    public void temItem(boolean b) {
-    }
 }
