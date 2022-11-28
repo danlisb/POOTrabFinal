@@ -9,7 +9,7 @@ public class Jogador {
     // private Item passivo;
     // private Item instantaneo;
 
-    public Jogador(String nome, int posicao, boolean tem) {
+    public Jogador(String nome, int posicaoInicial2, boolean b) {
         this.nome = nome;
         this.passosDados = 0;
         this.posicao = posicao;
@@ -21,7 +21,8 @@ public class Jogador {
         int valor;
         Random gerador = new Random();
         Dado dado = new Dado();
-        if(dado.rolar() == 6){
+
+        if(dado.rolar() == 6) {
           valor =  gerador.nextInt(6) + 1; // atualizar para 6 depois
           switch(valor) {
             case 1: // AsasDeIcaro

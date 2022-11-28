@@ -7,14 +7,11 @@ public class App {
 
         List <Jogador> jogadores = new ArrayList<>();
 
-
-        Jogador p1 = new Jogador("Ferrao", 0);
-        Jogador p2 = new Jogador("Daniel", 18);
+        Jogador p1 = new Jogador("Ferrao", 0, false);
+        Jogador p2 = new Jogador("Daniel", 18, false);
 
         jogadores.add(p1);
         jogadores.add(p2);
-
-
 
         Dado d = new Dado();
 
@@ -31,7 +28,6 @@ public class App {
         t.explodirPonte(jogadores);
 
         System.out.println("Posicao p1:" + jogadores.get(0).getPosicao());
-
 
     }
 }
