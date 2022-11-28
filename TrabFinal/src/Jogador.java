@@ -28,23 +28,23 @@ public class Jogador {
         if(dado.rolar() == 6) {
           valor =  gerador.nextInt(6) + 1; // atualizar para 6 depois
           switch(valor) {
-            case 1: // AsasDeIcaro
-                this.passivo = new AsasDeIcaro("Asas De Icaro");
+            case 1: 
+                this.passivo = new AsasDeIcaro();
                 break;
-            case 2: // Empurrar
-                this.passivo = new Empurrar("Empurrar");
+            case 2: 
+                this.passivo = new Empurrar();
                 break;
-            case 3: // Escudo
-                this.passivo = new Escudo("Escudo");
+            case 3: 
+                this.passivo = new Escudo();
                 break;
-            case 4: // Imobilizar
-                this.instantaneo = new Imobilizar("Imobilizar");
+            case 4: 
+                this.instantaneo = new Imobilizar();
                 break;
-            case 5: // Sabotar
-                this.instantaneo = new Sabotar("Sabotar");
+            case 5: 
+                this.instantaneo = new Sabotar();
                 break;
-            case 6: // Velocidade
-                this.instantaneo = new Velocidade("Velocidade");             
+            case 6: 
+                this.instantaneo = new Velocidade();             
                 break;
             }
         }
