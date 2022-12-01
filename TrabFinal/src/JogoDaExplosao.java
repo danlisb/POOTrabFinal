@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,25 +21,18 @@ public class JogoDaExplosao {
         String nomeDoJogador;
         int posicaoInicial = 0;
         int quantidadeDeJogadores = 0;
-        int idade = 0;
 
-        while (quantidadeDeJogadores < 2 || quantidadeDeJogadores > 4) { // Enquanto colocarem um numero invalido de
-                                                                         // jogadores a mensagem se repete
+        while (quantidadeDeJogadores < 2 || quantidadeDeJogadores > 4) {
+
             System.out.println(
                     "Selecione a quantidade de jogadores:\n2) 2 jogadores\n3) 3 jogadores\n4) 4 jogadores\nSua escolha:");
-            quantidadeDeJogadores = this.scanner.nextInt(); // Le o input do usuario para o numero de jogadores
+            quantidadeDeJogadores = this.scanner.nextInt();
+            if (quantidadeDeJogadores >= 2 && quantidadeDeJogadores <= 4)
 
-            if (quantidadeDeJogadores >= 2 && quantidadeDeJogadores <= 4) // Quando se entra com um numero valido de
-                                                                          // jogadores, entra aqui
                 for (int j = 0; j < quantidadeDeJogadores; j++) {
                     System.out.println("\nInsira o nome do jogador " + (j + 1) + ": ");
                     nomeDoJogador = this.scanner.next(); // Le o nome do jogador
-                    while(idade < 5){
-                    System.out.println("\nInsira a idade " + nomeDoJogador + ": ");
-                    idade = this.scanner.nextInt(); // Le a idade do jogador
-                    if(idade < 5)
-                    System.out.println("\nIdade inválida. Jogo não permitido para menores de cinco anos.");
-                    }
+
                     switch (j) {
                         case 0:
                             posicaoInicial = 0; // Posicao do primeiro jogador
@@ -53,13 +47,21 @@ public class JogoDaExplosao {
                             posicaoInicial = 15; // Posicao do quarto jogador
                             break;
                     }
-                    jogadores.add(new Jogador(nomeDoJogador, posicaoInicial, idade));
+                    jogadores.add(new Jogador(nomeDoJogador, posicaoInicial));
                 }
             else {
                 System.out.println("Entrada invalida, insira novamente!");
             }
         }
-        jogadores.sort(null);
+    }
+
+    public Jogador existeVencedor() {
+        for (Jogador jogador : jogadores) {
+            if (jogador.venceu() == true)
+                return jogador;
+        }
+
+        return null;
     }
 
     public void listarPosicaoJogadores() {
@@ -74,64 +76,66 @@ public class JogoDaExplosao {
         int escolha;
         Jogador jogador;
 
-        for (int j = 0; j < jogadores.size(); j++) {
-            jogador = jogadores.get(j);
+        while (existeVencedor() == null) {
+            
+            System.out.println("---------------------------------");
 
-            if (jogador.getImobilizado() == true) {
-                System.out.println(
-                        "O jogador " + jogador.getNome() + " está imobilizado, por isso não jogará essa rodada.\n");
-                jogador.setImobilizado(false);
-            } else {
-                System.out.println("Vez do jogador " + jogador.getNome() + "\n");
-                System.out.println("Escolha sua opção: \n1)Jogar dado. \n2)Usar item.\n");
-            }
-            escolha = this.scanner.nextInt();
-            if (escolha == 1) {
-                num = dado.rolar();
-                if (num <= 3) {
-                    jogador.moverJogador(num);
-                    System.out.println("Posção atual: " + jogador.getPosicao() + "\n");
-                    tabuleiro.colocaPonte(jogador.getPosicaoInicial(), jogador.getPosicao());
-                } else if (num == 4 || num == 5) {
-                    if (jogador.getSabotado() == false)
-                        this.tabuleiro.explodirPonte(jogadores);
-                    else {
-                        System.out.println("Este jogador está sabotado, a explosão nao ocorrerá!");
-                        jogador.setSabotado(false);
+            listarPosicaoJogadores();
+
+            for (int j = 0; j < jogadores.size(); j++) {
+                jogador = jogadores.get(j);
+
+                if (jogador.getImobilizado() == true) {
+                    System.out.println(
+                            "O jogador " + jogador.getNome() + " está imobilizado, por isso não jogará essa rodada.\n");
+                    jogador.setImobilizado(false);
+                } else {
+                    System.out.println("Vez do jogador " + jogador.getNome() + "\n");
+                    System.out.println("Escolha sua opção: \n1)Jogar dado. \n2)Usar item.\n");
+                }
+                escolha = this.scanner.nextInt();
+                if (escolha == 1) {
+                    num = dado.rolar();
+                    if (num <= 3) {
+                        jogador.moverJogador(num);
+                        // System.out.println("Posção atual: " + jogador.getPosicao() + "\n");
+                        tabuleiro.colocaPonte(jogador.getPosicaoInicial(), jogador.getPosicao());
+                    } else if (num == 4 || num == 5) {
+                        if (jogador.getSabotado() == false)
+                            this.tabuleiro.explodirPonte(jogadores);
+                        else {
+                            System.out.println("Este jogador está sabotado, a explosão nao ocorrerá!");
+                            jogador.setSabotado(false);
+                        }
+                    } else if (num == 6) {
+                        jogador.ganharItem();
+
                     }
-                } else if (num == 6) {
-                    jogador.ganharItem();
+
+                } else if (escolha == 2 && jogador.getInstantaneo() != null) {
+                    System.out.println("Escolha o alvo do item: ");
+                    nomeAlvo = this.scanner.next();
+
+                    for (Jogador alvo : jogadores) {
+                        if (alvo.getNome().equalsIgnoreCase(nomeAlvo))
+                            jogador.getInstantaneo().usaItem(jogador, alvo);
+
+                        else
+                            System.out.println("Jogador alvo inválido!\n");
+                    }
+                } else if (escolha == 2 && jogador.getInstantaneo() == null) {
+                    System.out.println("Você não possui itens instantaneos!\n");
+                    j--;
 
                 }
 
-            } else if (escolha == 2 && jogador.getInstantaneo() != null) {
-                System.out.println("Escolha o alvo do item: ");
-                nomeAlvo = this.scanner.next();
-
-                for (Jogador alvo : jogadores) {
-                    if (alvo.getNome().equalsIgnoreCase(nomeAlvo))
-                        jogador.getInstantaneo().usaItem(jogador, alvo);
-
-                    else
-                        System.out.println("Jogador alvo inválido!\n");
+                if (jogador.venceu() == true) {
+                    System.out.println("O jogo acabou! Parabéns " + jogador.getNome() + "!!!!!");
+                    break;
                 }
-            } else if (escolha == 2 && jogador.getInstantaneo() == null) {
-                System.out.println("Você não possui itens instantaneos!\n");
-                j--;
-
+                 
             }
-            if (jogador.venceu() == true) {
-                System.out.println("O jogo acabou! Parabéns " + jogador.getNome() + "!!!!!");
-                acaba();
-            }
-
         }
-        listarPosicaoJogadores();
-        rodada();
-    }
-
-    public void acaba() {
-
     }
 
     public static void main(String[] args) throws Exception {

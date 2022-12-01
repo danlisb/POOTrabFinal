@@ -5,12 +5,11 @@ public class Jogador {
     private int passosDados;
     private boolean imobilizado;
     private boolean sabotado;
-    private int idade;
 
     private Passivo passivo;
     private Instantaneo instantaneo;
 
-    public Jogador(String nome, int posicao, int idade) {
+    public Jogador(String nome, int posicao) {
         this.nome = nome;
         this.passosDados = 0;
         this.posicao = posicao;
@@ -19,7 +18,6 @@ public class Jogador {
         this.instantaneo = null;
         this.imobilizado = false;
         this.sabotado = false;
-        this.idade = idade;
     }
 
     public boolean getSabotado(){
