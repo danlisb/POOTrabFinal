@@ -1,15 +1,14 @@
 public class AsasDeIcaro extends Passivo {
+    // Asas de icaro: ao explodir a ponte em que o jogador está, as asas são ativadas.
+    // Elas permitem ao jogador voar até a próxima torre.
 
-    public AsasDeIcaro(String n) {
-        super(n);
+    public AsasDeIcaro() {
+        super("Asas De Icaro");
     }
 
     @Override
     public String toString() {
-        return "As asas de ícaro";
+        return super.toString() + super.getNome();
     }
 
-    /*  public boolean temAsas(Jogador jogador){
-        return true;
-    }*/
 }

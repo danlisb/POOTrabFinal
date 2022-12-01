@@ -1,9 +1,13 @@
+import java.util.Random;
+
 public class Velocidade extends Instantaneo {
     // Velocidade: duplica o valor tirado no dado.
+    private Random gerador;
 
     
     public Velocidade() {
         super("Velocidade");
+        this.gerador = new Random();
     }
 
     @Override
@@ -11,38 +15,13 @@ public class Velocidade extends Instantaneo {
         return super.toString() + super.getNome();
     }
 
-    public void usaItem(Jogador jogador, Jogador alvo){
-        super.usaItem(jogador, alvo);
-        Dado dado = new Dado();
-        int d = dado.rolar() + 1;
-        switch(d) {
-            case 1: // cima
-                jogador.moverJogador(d * 2);
-                jogador.resetInstantaneo();
-                break;
-            case 2: // direita
-                jogador.moverJogador(d * 2);
-                jogador.resetInstantaneo();
-                break;
-            case 3: // baixo
-                jogador.moverJogador(d * 2);
-                jogador.resetInstantaneo();
-                break;
-            case 4: // esquerda
-                d = 1;
-                jogador.moverJogador(d * 2);
-                jogador.resetInstantaneo();
-                break;
-            case 5:
-                d = 2;
-                jogador.moverJogador(d * 2);
-                jogador.resetInstantaneo();
-            break;
-            case 6:
-                d = 3;
-                jogador.moverJogador(d * 2);
-                jogador.resetInstantaneo();
-            break;
-        }
+    public void usaItem(Jogador jogador){
+        super.usaItem(jogador, jogador);
+        int d;
+        d = gerador.nextInt(3) + 1;
+        d *= 2;
+        jogador.moverJogador(d);
+        
+        System.out.println("O jogador usou velocidade e andou " + d + " casas");
     }
 }
