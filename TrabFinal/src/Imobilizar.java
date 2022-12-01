@@ -10,5 +10,9 @@ public class Imobilizar extends Instantaneo {
         return super.toString() + super.getNome();
     }
 
-   
+   public void usaItem(Jogador jogador, Jogador alvo){
+        super.usaItem(jogador, alvo);
+        alvo.setImobilizado(true);
+        jogador.resetInstantaneo();
+   }
 }

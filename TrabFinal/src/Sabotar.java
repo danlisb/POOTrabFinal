@@ -9,4 +9,9 @@ public class Sabotar extends Instantaneo {
     public String toString() {
         return super.toString() + super.getNome();
     }
+
+    public void usaItem(Jogador jogador, Jogador alvo) {
+        super.usaItem(jogador, alvo);
+        alvo.setSabotado(true);
+    }
 }

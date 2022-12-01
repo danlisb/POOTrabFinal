@@ -7,6 +7,8 @@ public class App {
 
         JogoDaExplosao jogo = new JogoDaExplosao();
         jogo.iniciarJogadores();
-
+        jogo.rodada();
+        
+        
     }
 }

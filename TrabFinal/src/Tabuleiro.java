@@ -35,18 +35,15 @@ public class Tabuleiro {
             for(int i = posicaoAnterior + 1; i <= posicaoDoJogador; i++)
                 if(!temPonte(i) && ehBuraco(i)) {
                     ambiente[i] = 1;
-                    System.out.println(i);
                 }
         } else {
             for(int i = posicaoAnterior + 1; i < 20; i++)
                 if(!temPonte(i) && ehBuraco(i)) {
                     ambiente[i] = 1;
-                    System.out.println(i);
                 }
             for(int i = 0; i <= posicaoDoJogador; i++)
                 if(!temPonte(i) && ehBuraco(i)) {
                     ambiente[i] = 1;
-                    System.out.println(i);
                 }
         }
     }
@@ -63,24 +60,36 @@ public class Tabuleiro {
             case 1: // cima
                 for(int i = 1; i < 5; i++)
                     tiraPonte(i);
+                    System.out.println("A ponte superior caiu!\n");
                 break;
             case 2: // direita
                 for(int i = 6; i < 10; i++)
                     tiraPonte(i);
+                    System.out.println("A ponte lateral direita caiu!\n");
                 break;
             case 3: // baixo
                 for(int i = 11; i < 15; i++)
                     tiraPonte(i);
+                    System.out.println("A ponte inferior caiu!\n");
                 break;
             case 4: // esquerda
                 for(int i = 16; i < 20; i++)
                     tiraPonte(i);
+                    System.out.println("A ponte lateral esquerda caiu!\n");
                 break;
             }
 
         for (Jogador jogador : jogadores) 
-            if(ambiente[jogador.getPosicao()] == 0)
-                jogador.moverParaTorreAnterior();
+            if(ambiente[jogador.getPosicao()] == 0 && jogador.getPassivo() instanceof AsasDeIcaro){
+                jogador.moverParaProximaTorre();
+                jogador.resetPassivo();
+                System.out.println("Jogador " + jogador.getNome() + " salvo pelas Asas de Icaro!\n");
+                }
+                else if(ambiente[jogador.getPosicao()] == 0 && jogador.getPassivo() instanceof AsasDeIcaro == false) {
+                    jogador.moverParaTorreAnterior();
+                    System.out.println("Jogador " + jogador.getNome() + " caiu e voltou a torre anterior!\n");
+                }
+
     }
 
     @Override
