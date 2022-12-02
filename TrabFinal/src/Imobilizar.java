@@ -21,7 +21,5 @@ public class Imobilizar extends Instantaneo {
 
         alvo.imobilizarJogador();
         autor.resetInstantaneo();
-
     }
-
 }

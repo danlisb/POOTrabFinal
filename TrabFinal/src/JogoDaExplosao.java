@@ -4,10 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import java.awt.Color;
-
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -117,7 +114,6 @@ public class JogoDaExplosao extends JFrame {
             if (jogador.venceu() == true)
                 return jogador;
         }
-
         return null;
     }
 
@@ -133,9 +129,7 @@ public class JogoDaExplosao extends JFrame {
         for (Jogador jog : jogadores) {
             jogadoresInfo += jog + "<br>";   
         }
-
         jogadoresInfo += "<html><body>";
-
         pMensagem.alterarTexto(jogadoresInfo);
     }
 

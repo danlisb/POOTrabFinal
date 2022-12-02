@@ -1,14 +1,10 @@
 import java.util.List;
 import java.util.Random;
 import java.awt.GridLayout;
-
-
 import javax.swing.JPanel;
 
 public class Tabuleiro extends JPanel{
     public static final int NUMERO_DE_CASAS = 20;
-
-
     private Celula[] tabuleiro;
     private Random gerador;
 
@@ -25,7 +21,6 @@ public class Tabuleiro extends JPanel{
     private void criarTabuleiro() {
         // Linha 1 ---
         int i;
-
 
         tabuleiro[0] = FabricaDeCelula.fabrica('T');
         add(tabuleiro[0]);

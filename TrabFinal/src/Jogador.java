@@ -2,7 +2,6 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 
 public class Jogador extends JPanel{
@@ -12,7 +11,6 @@ public class Jogador extends JPanel{
     private int passosDados;
     private boolean imobilizado;
     private boolean sabotado;
-
     private Passivo passivo;
     private Instantaneo instantaneo;
 
@@ -85,11 +83,11 @@ public class Jogador extends JPanel{
         int valor;
         Dado dado = new Dado();
 
-        valor = dado.rolagem(); // atualizar para 6 depois
+        valor = dado.rolagem();
         switch (valor) {
             case 1:
                 if (passivo != null)
-                    System.out.println("Você já possui um item!" + passivo.getNome() + "será substituido.\n");
+                    System.out.println("Você já possui um item!" + passivo.getNome() + " será substituido.\n");
 
                 passivo = new AsasDeIcaro();
                 System.out.println("Ganhou " + passivo.getNome());
@@ -97,7 +95,7 @@ public class Jogador extends JPanel{
                 break;
             case 2:
                 if (passivo != null)
-                    System.out.println("Você já possui um item!" + passivo.getNome() + "será substituido.\n");
+                    System.out.println("Você já possui um item!" + passivo.getNome() + " será substituido.\n");
 
                 passivo = new Empurrar();
                 System.out.println("Ganhou " + passivo.getNome());
@@ -105,7 +103,7 @@ public class Jogador extends JPanel{
                 break;
             case 3:
                 if (passivo != null)
-                    System.out.println("Você já possui um item!" + passivo.getNome() + "será substituido.\n");
+                    System.out.println("Você já possui um item!" + passivo.getNome() + " será substituido.\n");
 
                 passivo = new Escudo();
                 System.out.println("Ganhou " + passivo.getNome());
@@ -113,7 +111,7 @@ public class Jogador extends JPanel{
                 break;
             case 4:
                 if (instantaneo != null)
-                    System.out.println("Você já possui um item!" + instantaneo.getNome() + "será substituido.\n");
+                    System.out.println("Você já possui um item!" + instantaneo.getNome() + " será substituido.\n");
 
                 instantaneo = new Imobilizar();
                 System.out.println("Ganhou " + instantaneo.getNome());
@@ -121,7 +119,7 @@ public class Jogador extends JPanel{
                 break;
             case 5:
                 if (instantaneo != null)
-                    System.out.println("Você já possui um item!" + instantaneo.getNome() + "será substituido.\n");
+                    System.out.println("Você já possui um item!" + instantaneo.getNome() + " será substituido.\n");
 
                 instantaneo = new Sabotar();
                 System.out.println("Ganhou " + instantaneo.getNome());
@@ -129,7 +127,7 @@ public class Jogador extends JPanel{
                 break;
             case 6:
                 if (instantaneo != null)
-                    System.out.println("Você já possui um item!" + instantaneo.getNome() + "será substituido.\n");
+                    System.out.println("Você já possui um item!" + instantaneo.getNome() + " será substituido.\n");
                 instantaneo = new Velocidade();
                 System.out.println("Ganhou " + instantaneo.getNome());
 
@@ -203,14 +201,12 @@ public class Jogador extends JPanel{
     }
 
     public void usaItem(Jogador jogador, List<Jogador> jogadores, Tabuleiro tabuleiro) {
-
         Jogador autor = jogador;
 
         if (instantaneo == null)
             return;
         else 
             instantaneo.usaItem(autor, jogadores, tabuleiro);
-
     }
 
     @Override
@@ -224,10 +220,8 @@ public class Jogador extends JPanel{
             if(this.passivo != null)
             nPassivo = passivo.getNome();
 
-
         return "Nome: " + nome + " | Posicao: " + posicao + 
         "| Item instaneo: " + nInstantaneo + " | " +
         "Item passivo: " + nPassivo;
     }
-
 }

@@ -4,7 +4,6 @@ import java.util.Random;
 public class Velocidade extends Instantaneo {
     // Velocidade: duplica o valor tirado no dado.
     private Random gerador;
-
     
     public Velocidade() {
         super("Velocidade");
@@ -15,7 +14,6 @@ public class Velocidade extends Instantaneo {
     public String toString() {
         return super.toString() + super.getNome();
     }
-
     
     public void usaItem(Jogador autor, List<Jogador> jogadores, Tabuleiro tabuleiro){
         super.usaItem(autor, jogadores, tabuleiro);
@@ -28,6 +26,5 @@ public class Velocidade extends Instantaneo {
 
         autor.resetInstantaneo();
         tabuleiro.colocaPonte(posicaoAnterior, autor.getPosicao());
-        
     }
 }

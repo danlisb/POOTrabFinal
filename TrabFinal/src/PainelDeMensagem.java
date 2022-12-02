@@ -1,8 +1,5 @@
-
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 
 public class PainelDeMensagem extends JPanel {
     private final JLabel mensagem;

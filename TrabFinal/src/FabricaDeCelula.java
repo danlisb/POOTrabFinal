@@ -1,15 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 import java.awt.Color;
 import javax.swing.BorderFactory;
 
-/**
- *
- * @author Felipe Marques
- */
 public final class FabricaDeCelula {
     public static Celula fabrica(char tipo) {
         switch(tipo) {
@@ -17,7 +8,6 @@ public final class FabricaDeCelula {
             case 'P' :  return FabricaDeCelula.ponte();
             case 'V' :  return FabricaDeCelula.vazio();
             case 'B' :  return FabricaDeCelula.buraco();
-
         }
         return null;
     }

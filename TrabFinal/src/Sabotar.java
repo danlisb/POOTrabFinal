@@ -17,7 +17,5 @@ public class Sabotar extends Instantaneo {
         Jogador alvo = getAlvo(autor, jogadores);
         alvo.sabotarJogador();
         autor.resetInstantaneo();
-
-        
     }
 }

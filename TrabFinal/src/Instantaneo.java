@@ -39,10 +39,7 @@ abstract public class Instantaneo extends Item {
         return null;
     }
 
-
     public void usaItem(Jogador jogador, List<Jogador> jogadores, Tabuleiro tabuleiro) {
 
     }
-
-    
 }

@@ -1,10 +1,8 @@
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import java.awt.Color;
-
 
 public class Celula extends JPanel {
     private final Set<Jogador> jogadores;
