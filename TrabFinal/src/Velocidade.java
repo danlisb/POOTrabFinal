@@ -20,7 +20,7 @@ public class Velocidade extends Instantaneo {
         int d;
         d = gerador.nextInt(3) + 1;
         d *= 2;
-        jogador.moverJogador(d);
+        // jogador.moverJogador(d);
         
         System.out.println("O jogador usou velocidade e andou " + d + " casas");
     }

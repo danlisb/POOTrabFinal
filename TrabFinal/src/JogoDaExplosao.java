@@ -1,18 +1,75 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class JogoDaExplosao {
+import java.awt.Color;
+
+import java.awt.Component;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+public class JogoDaExplosao extends JFrame {
+    private final PainelDeMensagem pMensagem;
     private List<Jogador> jogadores;
     private Tabuleiro tabuleiro;
     private Dado dado;
     private Scanner scanner = new Scanner(System.in);
+    private static final Random gerador = new Random();
+    private static final Color[] coresDosJogadores = {
+            new Color(0, 0, 255),
+            new Color(34, 139, 34),
+            new Color(255, 140, 0),
+            new Color(139, 0, 139) };
 
     public JogoDaExplosao() {
         this.jogadores = new ArrayList<>();
         this.tabuleiro = new Tabuleiro();
         this.dado = new Dado();
+        this.pMensagem = new PainelDeMensagem("Bem-vindo ao Jogo de Tabuleiro!");
+    }
+
+    private void criarJanela() {
+        // Caracteristicas da Janela Principal
+        // ############################################
+        setTitle("Jogo de Tabuleiro");
+        setSize(520, 560);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        // Definição dos paineis ---------------------------
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        // -- Painel Superior ----------------------------------
+        JPanel pSuperior = new JPanel();
+
+        pSuperior.setLayout(new GridBagLayout());
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 0.8;
+        c.weighty = 1.0;
+        c.gridx = 0;
+        c.gridy = 0;
+        pSuperior.add(pMensagem, c);
+
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+        c.weighty = 0.1;
+        c.gridx = 0;
+        c.gridy = 0;
+        add(pSuperior, c);
+
+        // -- Tabuleiro --------------------------------------
+        c.weightx = 1.0;
+        c.weighty = 0.9;
+        c.gridx = 0;
+        c.gridy = 1;
+        add(tabuleiro, c);
+
+        setVisible(true);
     }
 
     public void iniciarJogadores() { // Recebe a quantidade de jogadores e os inicializa, com nomes e suas posicoes
@@ -47,12 +104,14 @@ public class JogoDaExplosao {
                             posicaoInicial = 15; // Posicao do quarto jogador
                             break;
                     }
-                    jogadores.add(new Jogador(nomeDoJogador, posicaoInicial));
+                    jogadores.add(new Jogador(nomeDoJogador, posicaoInicial, coresDosJogadores[j]));
                 }
             else {
                 System.out.println("Entrada invalida, insira novamente!");
             }
         }
+        tabuleiro.adicionarJogadores(jogadores);
+
     }
 
     public Jogador existeVencedor() {
@@ -70,6 +129,18 @@ public class JogoDaExplosao {
         }
     }
 
+    public void atualizaMensagem() {
+        String jogadoresInfo = "<html><body>";
+
+        for (Jogador jog : jogadores) {
+            jogadoresInfo += jog + "<br>";   
+        }
+
+        jogadoresInfo += "<html><body>";
+
+        pMensagem.alterarTexto(jogadoresInfo);
+    }
+
     public void rodada() {
         String nomeAlvo;
         int num;
@@ -77,12 +148,13 @@ public class JogoDaExplosao {
         Jogador jogador;
 
         while (existeVencedor() == null) {
-            
+
             System.out.println("---------------------------------");
 
             listarPosicaoJogadores();
 
             for (int j = 0; j < jogadores.size(); j++) {
+                atualizaMensagem();
                 jogador = jogadores.get(j);
 
                 if (jogador.getImobilizado() == true) {
@@ -97,9 +169,9 @@ public class JogoDaExplosao {
                 if (escolha == 1) {
                     num = dado.rolar();
                     if (num <= 3) {
-                        jogador.moverJogador(num);
+                        int posicaoAnterior = tabuleiro.moverJogador(jogador, num);
                         // System.out.println("Posção atual: " + jogador.getPosicao() + "\n");
-                        tabuleiro.colocaPonte(jogador.getPosicaoInicial(), jogador.getPosicao());
+                        tabuleiro.colocaPonte(posicaoAnterior, jogador.getPosicao());
                     } else if (num == 4 || num == 5) {
                         if (jogador.getSabotado() == false)
                             this.tabuleiro.explodirPonte(jogadores);
@@ -128,17 +200,22 @@ public class JogoDaExplosao {
                     j--;
 
                 }
+                atualizaMensagem();
 
                 if (jogador.venceu() == true) {
                     System.out.println("O jogo acabou! Parabéns " + jogador.getNome() + "!!!!!");
                     break;
                 }
-                 
+
             }
         }
     }
 
     public static void main(String[] args) throws Exception {
+        JogoDaExplosao jogo = new JogoDaExplosao();
+        jogo.iniciarJogadores();
+        jogo.criarJanela();
 
+        jogo.rodada();
     }
 }

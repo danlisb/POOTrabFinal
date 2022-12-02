@@ -1,4 +1,9 @@
-public class Jogador {
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.BorderFactory;
+
+public class Jogador extends JPanel{
     private String nome;
     private int posicao;
     private int posicaoInicial;
@@ -9,7 +14,7 @@ public class Jogador {
     private Passivo passivo;
     private Instantaneo instantaneo;
 
-    public Jogador(String nome, int posicao) {
+    public Jogador(String nome, int posicao, Color cor) {
         this.nome = nome;
         this.passosDados = 0;
         this.posicao = posicao;
@@ -18,6 +23,10 @@ public class Jogador {
         this.instantaneo = null;
         this.imobilizado = false;
         this.sabotado = false;
+
+        setPreferredSize(new Dimension(20, 20));
+        setBackground(cor);
+        setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
     }
 
     public boolean getSabotado(){
@@ -120,7 +129,7 @@ public class Jogador {
         return nome;
     }
 
-    public int moverJogador(int numeroDePassos) {
+    public int mover(int numeroDePassos) {
         int posicaoAnterior = this.posicao;
 
         if (this.posicao + numeroDePassos > 19)
@@ -138,42 +147,56 @@ public class Jogador {
         return passosDados >= 20;
     }
 
-    public void moverParaProximaTorre() {
+    public int moverParaProximaTorre() {
         int posicaoAnterior = this.posicao;
+        int proximaTorre = 0;
 
         if (this.posicao > 0 && this.posicao < 5)
-            this.posicao = 5;
+            proximaTorre = 5;
         else if (this.posicao > 5 && this.posicao < 10)
-            this.posicao = 10;
+            proximaTorre = 10;
         else if (this.posicao > 10 && this.posicao < 15)
-            this.posicao = 15;
+            proximaTorre = 15;
         else if (this.posicao > 15)
-            this.posicao = 0;
+            proximaTorre = 0;
 
-        if (posicaoAnterior < this.posicao)
-            this.passosDados += this.posicao - posicaoAnterior;
+        if (proximaTorre > posicaoAnterior){
+            return proximaTorre - this.posicao;
+        }
         else
-            this.passosDados += 20 - posicaoAnterior;
+            return 20 - this.posicao;
     }
 
-    public void moverParaTorreAnterior() {
-        int posicaoAnterior = this.posicao;
+    public int moverParaTorreAnterior() {
+        int torreAnterior = 0;
 
         if (this.posicao > 0 && this.posicao < 5)
-            this.posicao = 0;
+            torreAnterior = 0;
         else if (this.posicao > 5 && this.posicao < 10)
-            this.posicao = 5;
+            torreAnterior = 5;
         else if (this.posicao > 10 && this.posicao < 15)
-            this.posicao = 10;
+            torreAnterior = 10;
         else if (this.posicao > 15)
-            this.posicao = 15;
+            torreAnterior = 15;
 
-        this.passosDados -= posicaoAnterior - this.posicao;
+        return torreAnterior - this.posicao;
     }
 
     @Override
     public String toString() {
-        return "Nome: " + nome + " - Posicao: " + posicao;
+        String nInstantaneo = "N/A";
+        String nPassivo = "N/A";
+
+        if(this.instantaneo != null)
+            nInstantaneo = instantaneo.getNome();
+
+            if(this.passivo != null)
+            nPassivo = passivo.getNome();
+
+
+        return "Nome: " + nome + " | Posicao: " + posicao + 
+        "| Item instaneo: " + nInstantaneo + " | " +
+        "Item passivo: " + nPassivo;
     }
 
 }
