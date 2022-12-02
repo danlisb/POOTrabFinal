@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Random;
 
 public class Velocidade extends Instantaneo {
@@ -15,13 +16,18 @@ public class Velocidade extends Instantaneo {
         return super.toString() + super.getNome();
     }
 
-    public void usaItem(Jogador jogador){
-        super.usaItem(jogador, jogador);
+    
+    public void usaItem(Jogador autor, List<Jogador> jogadores, Tabuleiro tabuleiro){
+        super.usaItem(autor, jogadores, tabuleiro);
         int d;
         d = gerador.nextInt(3) + 1;
         d *= 2;
-        // jogador.moverJogador(d);
+        int posicaoAnterior = tabuleiro.moverJogador(autor, d);
         
         System.out.println("O jogador usou velocidade e andou " + d + " casas");
+
+        autor.resetInstantaneo();
+        tabuleiro.colocaPonte(posicaoAnterior, autor.getPosicao());
+        
     }
 }

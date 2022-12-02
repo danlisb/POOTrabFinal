@@ -1,14 +1,13 @@
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.Color;
 
-import java.awt.Component;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -18,7 +17,6 @@ public class JogoDaExplosao extends JFrame {
     private Tabuleiro tabuleiro;
     private Dado dado;
     private Scanner scanner = new Scanner(System.in);
-    private static final Random gerador = new Random();
     private static final Color[] coresDosJogadores = {
             new Color(0, 0, 255),
             new Color(34, 139, 34),
@@ -142,7 +140,6 @@ public class JogoDaExplosao extends JFrame {
     }
 
     public void rodada() {
-        String nomeAlvo;
         int num;
         int escolha;
         Jogador jogador;
@@ -160,7 +157,7 @@ public class JogoDaExplosao extends JFrame {
                 if (jogador.getImobilizado() == true) {
                     System.out.println(
                             "O jogador " + jogador.getNome() + " está imobilizado, por isso não jogará essa rodada.\n");
-                    jogador.setImobilizado(false);
+                    jogador.resetImobilizado();
                 } else {
                     System.out.println("Vez do jogador " + jogador.getNome() + "\n");
                     System.out.println("Escolha sua opção: \n1)Jogar dado. \n2)Usar item.\n");
@@ -170,32 +167,51 @@ public class JogoDaExplosao extends JFrame {
                     num = dado.rolar();
                     if (num <= 3) {
                         int posicaoAnterior = tabuleiro.moverJogador(jogador, num);
-                        // System.out.println("Posção atual: " + jogador.getPosicao() + "\n");
+                        if (jogador.getPassivo() instanceof Empurrar) {
+                            if (jogador.getPosicao() + num > 19)
+                                for (int i = posicaoAnterior; i < jogador.getPosicao(); i++)
+                                    for (Jogador jogadorAlvo : jogadores) {
+                                        if (jogadorAlvo.getPosicao() == i) {
+                                            tabuleiro.moverJogador(jogadorAlvo, jogadorAlvo.moverParaTorreAnterior());
+                                            break;
+                                        }
+                                    }
+                            else {
+                                for (int i = posicaoAnterior; i <= 19; i++)
+                                    for (Jogador jogadorAlvo : jogadores)
+                                        if (jogadorAlvo.getPosicao() == i) {
+                                            tabuleiro.moverJogador(jogadorAlvo, jogadorAlvo.moverParaTorreAnterior());
+
+                                            break;
+                                        }
+
+                                for (int i = 0; i <= jogador.getPosicao(); i++)
+                                    for (Jogador jogadorAlvo : jogadores)
+                                        if (jogadorAlvo.getPosicao() == i) {
+                                            tabuleiro.moverJogador(jogadorAlvo, jogadorAlvo.moverParaTorreAnterior());
+                                            break;
+                                        }
+                            }
+                        }
+                        
                         tabuleiro.colocaPonte(posicaoAnterior, jogador.getPosicao());
+
                     } else if (num == 4 || num == 5) {
                         if (jogador.getSabotado() == false)
                             this.tabuleiro.explodirPonte(jogadores);
                         else {
                             System.out.println("Este jogador está sabotado, a explosão nao ocorrerá!");
-                            jogador.setSabotado(false);
+                            jogador.resetSabotado();
                         }
                     } else if (num == 6) {
                         jogador.ganharItem();
-
                     }
 
                 } else if (escolha == 2 && jogador.getInstantaneo() != null) {
-                    System.out.println("Escolha o alvo do item: ");
-                    nomeAlvo = this.scanner.next();
+                    jogador.usaItem(jogador, jogadores, tabuleiro);
+                }
 
-                    for (Jogador alvo : jogadores) {
-                        if (alvo.getNome().equalsIgnoreCase(nomeAlvo))
-                            jogador.getInstantaneo().usaItem(jogador, alvo);
-
-                        else
-                            System.out.println("Jogador alvo inválido!\n");
-                    }
-                } else if (escolha == 2 && jogador.getInstantaneo() == null) {
+                else if (escolha == 2 && jogador.getInstantaneo() == null) {
                     System.out.println("Você não possui itens instantaneos!\n");
                     j--;
 

@@ -12,5 +12,8 @@ abstract public class Passivo extends Item {
     public String toString() {
         return "Passivo - ";
     }
-
+    
+    public void usaItem(){
+        
+    }
 }

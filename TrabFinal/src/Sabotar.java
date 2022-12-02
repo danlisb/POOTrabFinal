@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Sabotar extends Instantaneo {
     // Sabotar: Evita que um adversário acione o mecanismo de explosão.
 
@@ -10,8 +12,12 @@ public class Sabotar extends Instantaneo {
         return super.toString() + super.getNome();
     }
 
-    public void usaItem(Jogador jogador, Jogador alvo) {
-        super.usaItem(jogador, alvo);
-        alvo.setSabotado(true);
+    public void usaItem(Jogador autor, List<Jogador> jogadores, Tabuleiro tabuleiro) {
+        super.usaItem(autor, jogadores, tabuleiro);
+        Jogador alvo = getAlvo(autor, jogadores);
+        alvo.sabotarJogador();
+        autor.resetInstantaneo();
+
+        
     }
 }

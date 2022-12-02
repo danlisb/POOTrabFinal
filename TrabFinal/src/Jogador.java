@@ -1,6 +1,8 @@
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.List;
+
 import javax.swing.BorderFactory;
 
 public class Jogador extends JPanel{
@@ -33,9 +35,35 @@ public class Jogador extends JPanel{
         return sabotado;
     }
 
-    public void setSabotado(boolean i){
-        sabotado = i;
+    public void sabotarJogador() {
+        if(this.passivo instanceof Escudo) {
+            System.out.println(this.nome + " tinha escudo e se defendeu de Sabotar");
+            this.passivo = null;
+        } else 
+            this.sabotado = true;
     }
+
+    public void resetSabotado() {
+        this.sabotado = false;
+    }
+
+
+    public boolean getImobilizado() {
+        return this.imobilizado;
+    }
+
+    public void imobilizarJogador() {
+        if(this.passivo instanceof Escudo) {
+            System.out.println(this.nome + " tinha escudo e se defendeu de Imobilizar");
+            this.passivo = null;
+        } else 
+            this.imobilizado = true;
+    }
+
+    public void resetImobilizado() {
+        this.imobilizado = false;
+    }
+
 
     public Passivo getPassivo() {
         return this.passivo;
@@ -51,14 +79,6 @@ public class Jogador extends JPanel{
 
     public void resetInstantaneo() {
         this.instantaneo = null;
-    }
-
-    public boolean getImobilizado() {
-        return this.imobilizado;
-    }
-
-    public void setImobilizado(boolean i) {
-        this.imobilizado = i;
     }
 
     public void ganharItem() {
@@ -180,6 +200,17 @@ public class Jogador extends JPanel{
             torreAnterior = 15;
 
         return torreAnterior - this.posicao;
+    }
+
+    public void usaItem(Jogador jogador, List<Jogador> jogadores, Tabuleiro tabuleiro) {
+
+        Jogador autor = jogador;
+
+        if (instantaneo == null)
+            return;
+        else 
+            instantaneo.usaItem(autor, jogadores, tabuleiro);
+
     }
 
     @Override
